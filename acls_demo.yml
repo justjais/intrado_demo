@@ -1,5 +1,6 @@
 ---
-- hosts: asa
+- name: ASA intrado demo playbook
+  hosts: asa
   collections:
     - cisco.asa
   tasks:

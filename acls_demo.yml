@@ -3,6 +3,7 @@
   hosts: asa
   collections:
     - cisco.asa
+  gather_facts: no
   tasks:
   - name: Demo Merge Operation
     cisco.asa.asa_acls:

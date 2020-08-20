@@ -2,6 +2,7 @@
 - hosts: asa
   collections:
     - cisco.asa
+  gather_facts: no
   tasks:
   - name: Delete ALL configured ACLs
     cisco.asa.asa_acls:

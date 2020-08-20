@@ -1,0 +1,9 @@
+---
+- hosts: asa
+  collections:
+    - cisco.asa
+  tasks:
+  - name: Delete ALL configured ACLs
+    cisco.asa.asa_acls:
+      state: deleted
+    tags: delete

@@ -13,6 +13,9 @@
               - grant: permit
                 line: 1
                 protocol: icmp
+                protocol_options:
+                  icmp:
+                    alternate_address: true
                 source:
                   any: true
                 destination:
@@ -21,6 +24,8 @@
               - grant: deny
                 line: 2
                 protocol: tcp
+                protocol_options:
+                  tcp: true
                 source:
                   address: 192.0.2.0
                   netmask: 255.255.255.0
@@ -39,9 +44,8 @@
                 source:
                   host: 198.51.101.1
                 destination:
-                  host: 198.51.101.2
+                  any: true
                   port_protocol:
                     eq: www
                 log: default
       state: merged
-    tags: merged

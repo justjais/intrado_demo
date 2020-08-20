@@ -1,0 +1,47 @@
+---
+- hosts: asa
+  collections:
+    - cisco.asa
+  tasks:
+  - name: Demo Merge Operation
+    cisco.asa.asa_acls:
+      config:
+        - acls:
+          - name: test_access
+            acl_type: extended
+            aces:
+              - grant: permit
+                line: 1
+                protocol: icmp
+                source:
+                  any: true
+                destination:
+                  any: true
+                log: errors
+              - grant: deny
+                line: 2
+                protocol: tcp
+                source:
+                  address: 192.0.2.0
+                  netmask: 255.255.255.0
+                destination:
+                  address: 192.0.3.0
+                  netmask: 255.255.255.0
+                  port_protocol:
+                    eq: www
+                log: default
+              - grant: deny
+                remark: deny_traffic
+                line: 3
+                protocol: tcp
+                protocol_options:
+                  tcp: true
+                source:
+                  host: 198.51.101.1
+                destination:
+                  host: 198.51.101.2
+                  port_protocol:
+                    eq: www
+                log: default
+      state: merged
+    tags: merged
